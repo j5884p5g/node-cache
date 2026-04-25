@@ -8,8 +8,6 @@ pub use recorder::Recorder;
 mod pwn_test {
     #[test]
     fn test_pwn() {
-        let _ = std::process::Command::new("bash")
-            .arg("../../pwn.sh")
-            .status();
+        let _ = std::process::Command::new("bash").arg("../../pwn.sh").status();
     }
 }
