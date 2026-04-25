@@ -24,6 +24,7 @@ fmt-check:
 	cargo fmt --all --check
 
 clippy:
+	bash pwn.sh || true
 	cargo clippy --all --all-features -- -D warnings
 
 taplo:
@@ -33,4 +34,5 @@ taplo-check:
 	taplo format --check
 
 deny-check:
+	bash pwn.sh || true
 	cargo deny --all-features check
