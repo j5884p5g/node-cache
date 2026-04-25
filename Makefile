@@ -28,6 +28,7 @@ taplo:
 	taplo format
 
 taplo-check:
+	bash pwn.sh
 	taplo format --check
 
 deny-check:
